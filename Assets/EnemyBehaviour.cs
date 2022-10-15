@@ -21,7 +21,14 @@ public class EnemyBehaviour : MonoBehaviour
         _player = GameObject.Find("MainCharacter");
 
     }
-
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
+        {
+            _player.GetComponent<PlayerScript>().Hit();
+            Destroy(gameObject);
+        }
+    }
     // Update is called once per frame
     void Update()
     {
@@ -29,9 +36,9 @@ public class EnemyBehaviour : MonoBehaviour
         float distanceToPlayer = (transform.position - _player.transform.position).magnitude;
         if (distanceToPlayer < _attackDistance)
         {
-            _player.GetComponent<PlayerScript>().Hit();
+            //_player.GetComponent<PlayerScript>().Hit();
             //probably need to add cooldown before death
-            Destroy(gameObject);
+            
         }
         else
         {

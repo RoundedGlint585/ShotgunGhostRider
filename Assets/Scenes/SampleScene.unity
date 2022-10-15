@@ -937,7 +937,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 1213796384}
   healthPointObject: {fileID: 8659538081177645513, guid: 9a5545c9e8a8d684f8329115b30e1b74, type: 3}
-  offset: 20
+  offset: 25
   healthPoints: []
 --- !u!1 &1508100342
 GameObject:
