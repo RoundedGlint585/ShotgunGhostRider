@@ -17,6 +17,16 @@ public class GameProgressScript : MonoBehaviour
         
     }
 
+    public float GetLevelLength()
+    {
+        return levelLength;
+    }
+    
+    public float GetCurrentTime()
+    {
+        return currentTime;
+    }
+
     // Update is called once per frame
     void Update()
     {

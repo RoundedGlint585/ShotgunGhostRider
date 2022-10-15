@@ -5,6 +5,8 @@ using UnityEngine;
 public class PlayerScript : MonoBehaviour
 {
     [SerializeField]
+    private int _maxLifeCount = 4;
+
     private int _lifeCount = 4;
 
     [SerializeField]
@@ -12,6 +14,11 @@ public class PlayerScript : MonoBehaviour
 
     private bool _isDead = false;
 
+
+    public int GetMaxLifesCount()
+    {
+        return _maxLifeCount;
+    }
     public int GetLifes()
     {
         return _lifeCount;
@@ -39,7 +46,7 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        _lifeCount = _maxLifeCount;
     }
 
     // Update is called once per frame
