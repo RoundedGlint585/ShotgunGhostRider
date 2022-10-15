@@ -19,10 +19,25 @@ public class ShootingScript : MonoBehaviour
     [SerializeField] private AnimationCurve animCurve;
 
     public GameObject projectileObject;
+
+
+    private GameObject playerMovementBB;
+
+    private float yMin, yMax;
+    private float xMin, xMax;
     // Start is called before the first frame update
     void Start()
     {
         shootedLastTime = _shotCooldown;
+        playerMovementBB = GameObject.Find("PlayerMovementBB");
+
+
+        Vector3 max = playerMovementBB.gameObject.GetComponent<SpriteRenderer>().bounds.max;
+        Vector3 min = playerMovementBB.gameObject.GetComponent<SpriteRenderer>().bounds.min;
+        yMin = min.y;
+        yMax = max.y;
+        xMin = min.x;
+        xMax = max.x;
     }
 
     // Update is called once per frame
@@ -43,7 +58,13 @@ public class ShootingScript : MonoBehaviour
                 shootingRecoilTimers.RemoveAt(0);
                 shootingRecoilDirections.RemoveAt(0);
             }
-            transform.position = transform.position + finalStrength;
+
+
+            Vector3 resolvedPosition = transform.position + finalStrength;
+            if (resolvedPosition.x < xMax && resolvedPosition.x > xMin && resolvedPosition.y < yMax && resolvedPosition.y > yMin)
+            {
+                transform.position = resolvedPosition;
+            }
         }
 
         shootedLastTime += Time.deltaTime;

@@ -15,6 +15,8 @@ public class EnemyBehaviour : MonoBehaviour
     [SerializeField]
     float _attackDistance = 0.5f;
 
+    private bool _wasRenderedAtLeastOnce = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +34,10 @@ public class EnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if( _wasRenderedAtLeastOnce)
+        {
+            _wasRenderedAtLeastOnce = GetComponentInChildren<SpriteRenderer>().isVisible;
+        }
         float distanceToPlayer = (transform.position - _player.transform.position).magnitude;
         if (distanceToPlayer < _attackDistance)
         {
@@ -48,7 +53,7 @@ public class EnemyBehaviour : MonoBehaviour
             transform.position = transform.position + playerMovementOffset + toPlayerMovement;
             //transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, step);
         }
-        if (!GetComponentInChildren<SpriteRenderer>().isVisible)
+        if (!GetComponentInChildren<SpriteRenderer>().isVisible && _wasRenderedAtLeastOnce)
         {
             Destroy(gameObject);
         }
