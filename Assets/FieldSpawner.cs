@@ -51,6 +51,7 @@ public class FieldSpawner : MonoBehaviour
             NewTile.transform.position = new Vector3(lastTile.transform.position.x + tileSize, 0.0f, 0.0f);
             lastTile.GetComponentInChildren<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
             lastTile.transform.localScale = new Vector3(tileSize, tileSize, 1);
+            currentTileCount++;
             lastTile = NewTile;
         }
     }
