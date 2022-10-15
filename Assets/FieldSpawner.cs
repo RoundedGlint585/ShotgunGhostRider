@@ -32,6 +32,7 @@ public class FieldSpawner : MonoBehaviour
             lastTile.transform.position = new Vector3(i * tileSize, 0, 0);
             lastTile.GetComponentInChildren<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
             lastTile.transform.localScale = new Vector3(tileSize, tileSize, 1);
+            lastTile.layer = LayerMask.NameToLayer("Level");
         }
         currentTileCount = maxTileCount;
     }
@@ -49,10 +50,12 @@ public class FieldSpawner : MonoBehaviour
             GameObject NewTile;
             NewTile = Instantiate(tile, transform);
             NewTile.transform.position = new Vector3(lastTile.transform.position.x + tileSize, 0.0f, 0.0f);
-            lastTile.GetComponentInChildren<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
-            lastTile.transform.localScale = new Vector3(tileSize, tileSize, 1);
+            NewTile.GetComponentInChildren<SpriteRenderer>().color = new Color(Random.value, Random.value, Random.value);
+            NewTile.transform.localScale = new Vector3(tileSize, tileSize, 1);
+            NewTile.layer = LayerMask.NameToLayer("Level");
             currentTileCount++;
             lastTile = NewTile;
+            
         }
     }
 }
