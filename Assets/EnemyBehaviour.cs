@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class EnemyBehaviour : MonoBehaviour
 {
@@ -9,15 +11,11 @@ public class EnemyBehaviour : MonoBehaviour
     Vector3 _direction;
 
     [SerializeField]
-    float _maxDistance = 1;
+    float _maxSpeed = 1;
 
     [SerializeField]
     float _attackDistance = 0.5f;
 
-    [SerializeField]
-    float _attackCooldown = 1.0f;
-
-    private float _lastAttackTimer = 0.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,8 +26,7 @@ public class EnemyBehaviour : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        _lastAttackTimer += Time.deltaTime;
-        float step = _maxDistance * Time.deltaTime;
+
         float distanceToPlayer = (transform.position - _player.transform.position).magnitude;
         if (distanceToPlayer < _attackDistance)
         {
@@ -39,7 +36,15 @@ public class EnemyBehaviour : MonoBehaviour
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, step);
+            Vector3 playerMovementOffset = new Vector3(-1.0f, 0.0f, 0.0f) * _player.GetComponent<PlayerScript>().GetMaxSpeed() * Time.deltaTime;
+            float step = _maxSpeed * Time.deltaTime;
+            Vector3 toPlayerMovement = (_player.transform.position - transform.position).normalized * step;
+            transform.position = transform.position + playerMovementOffset + toPlayerMovement;
+            //transform.position = Vector3.MoveTowards(transform.position, _player.transform.position, step);
+        }
+        if (!GetComponentInChildren<SpriteRenderer>().isVisible)
+        {
+            Destroy(gameObject);
         }
     }
 }

@@ -7,6 +7,9 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private int _lifeCount = 4;
 
+    [SerializeField]
+    private float _maxSpeed = 1.0f;
+
     private bool _isDead = false;
 
     public int GetLifes()
@@ -14,6 +17,10 @@ public class PlayerScript : MonoBehaviour
         return _lifeCount;
     }
 
+    public float GetMaxSpeed()
+    {
+        return _maxSpeed;
+    }
     public int Hit()
     {
         _lifeCount -= 1;

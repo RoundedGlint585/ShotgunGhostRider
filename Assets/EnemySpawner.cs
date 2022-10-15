@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Xml.Schema;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
@@ -16,6 +17,7 @@ public class EnemySpawner : MonoBehaviour
     public GameObject Enemy;
 
     float yMin, yMax;
+    float xMin, xMax;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,8 @@ public class EnemySpawner : MonoBehaviour
         Vector3 min = bb.gameObject.GetComponent<SpriteRenderer>().bounds.min;
         yMin = min.y;
         yMax = max.y;
+        xMin = min.x;
+        xMax = max.x;
     }
 
     // Update is called once per frame
@@ -36,6 +40,7 @@ public class EnemySpawner : MonoBehaviour
             if (GameObject.FindGameObjectsWithTag("Enemy").Length < _maxEnemies)
             {
                 float y = Random.Range(yMin, yMax);
+                float x = Random.Range(xMin, xMax);
                 Vector3 spawnPos = new Vector3(transform.position.x, y, 0.0f);
                 GameObject spawnedEnemy;
                 spawnedEnemy = Instantiate(Enemy, spawnPos, Quaternion.identity);
