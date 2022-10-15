@@ -35,6 +35,10 @@ public class HealthBarBehaviour : MonoBehaviour
     {
         int maxHealthPointsCount = _player.GetComponent<PlayerScript>().GetMaxLifesCount();
         int currentLifePoints = _player.GetComponent<PlayerScript>().GetLifes();
+        if(currentLifePoints < 0)
+        {
+            return;
+        }
         for(int i = 0; i < currentLifePoints; i++)
         {
             healthPoints[i].GetComponent<HealthPointBehaviour>().EnableLife();
