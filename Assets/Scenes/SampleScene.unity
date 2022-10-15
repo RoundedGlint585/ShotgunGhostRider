@@ -1657,6 +1657,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 8426671463080241286, guid: fbbe670e29ebebd4f9f79413b2e95c54, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 5.1067414
+      objectReference: {fileID: 0}
+    - target: {fileID: 8426671463080241286, guid: fbbe670e29ebebd4f9f79413b2e95c54, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -1.4229
+      objectReference: {fileID: 0}
     - target: {fileID: 8426671463460548172, guid: fbbe670e29ebebd4f9f79413b2e95c54, type: 3}
       propertyPath: m_Name
       value: EnemySpawner
