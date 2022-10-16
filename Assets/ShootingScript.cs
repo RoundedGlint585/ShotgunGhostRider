@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class ShootingScript : MonoBehaviour
 {
     [SerializeField]
@@ -61,10 +61,11 @@ public class ShootingScript : MonoBehaviour
 
 
             Vector3 resolvedPosition = transform.position + finalStrength;
-            if (resolvedPosition.x < xMax && resolvedPosition.x > xMin && resolvedPosition.y < yMax && resolvedPosition.y > yMin)
-            {
-                transform.position = resolvedPosition;
-            }
+            resolvedPosition.x = Math.Min(xMax, resolvedPosition.x);
+            resolvedPosition.x = Math.Max(xMin, resolvedPosition.x);
+            resolvedPosition.y = Math.Min(yMax, resolvedPosition.y);
+            resolvedPosition.y = Math.Max(yMin, resolvedPosition.y);
+            transform.position = resolvedPosition;
         }
 
         shootedLastTime += Time.deltaTime;
