@@ -91,6 +91,7 @@ public class PlayerScript : MonoBehaviour
                 if(changeImageTimer > 1.0f)
                 {
                     transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = deadPlayer;
+                    transform.GetChild(2).transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
                 }
                 if(changeImageTimer > 1.2f)
                 {
