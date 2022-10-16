@@ -5,6 +5,8 @@ using System;
 public class ShootingScript : MonoBehaviour
 {
     [SerializeField]
+    private bool _canShoot = true;
+    [SerializeField]
     private float _shotCooldown = 0.5f;
 
 
@@ -73,7 +75,7 @@ public class ShootingScript : MonoBehaviour
         mousePosition.z = 0.0f;
         Vector3 currentPosition = transform.position;
         Vector3 direction = (mousePosition - currentPosition).normalized;
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && _canShoot)
         {
             if (shootedLastTime > _shotCooldown)
             {

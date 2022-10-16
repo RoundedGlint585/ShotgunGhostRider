@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerScript : MonoBehaviour
 {
@@ -12,9 +13,13 @@ public class PlayerScript : MonoBehaviour
     [SerializeField]
     private float _maxSpeed = 1.0f;
 
+    [SerializeField]
+    private float _internalSpeed = 1.0f; // only for main menu
+
     private bool _isDead = false;
 
-
+    public bool needToMove = false;
+    public bool isMainMenu = false;
     public int GetMaxLifesCount()
     {
         return _maxLifeCount;
@@ -27,6 +32,10 @@ public class PlayerScript : MonoBehaviour
     public float GetMaxSpeed()
     {
         return _maxSpeed;
+    }
+    public void SetMaxSpeed(float value)
+    {
+        _maxSpeed = value;
     }
     public int Hit()
     {
@@ -52,6 +61,14 @@ public class PlayerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (needToMove)
+        {
+            transform.position = transform.position + new Vector3(1, 0, 0) * _internalSpeed * Time.deltaTime;
+            transform.GetChild(1).gameObject.SetActive(true);
+            transform.GetChild(0).gameObject.GetComponent<Animator>().enabled = true;
+            if (!transform.GetChild(0).gameObject.GetComponent < SpriteRenderer>().isVisible){
+                SceneManager.LoadScene(1);
+            }
+        }   
     }
 }
