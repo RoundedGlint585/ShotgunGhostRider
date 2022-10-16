@@ -2,8 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Random = UnityEngine.Random;
+
 public class ShootingScript : MonoBehaviour
 {
+    public enum GunType
+    {
+        Pistol = 1,
+        Shotgun = 2,
+        HeavyShotgun = 3,
+    }
+
+    public int projectileCount = 1;
+    [SerializeField]
+    public GunType gunType;
+
     [SerializeField]
     public bool _canShoot = true;
     [SerializeField]
@@ -25,6 +38,24 @@ public class ShootingScript : MonoBehaviour
 
     private GameObject playerMovementBB;
 
+
+    [SerializeField]
+    private float pistolOffsetStrength = 0.01f;
+
+    [SerializeField]
+    private int shotgunProjectileCount =3;
+    [SerializeField]
+    private float shootOffsetStrengthShotgun = 1.0f;
+    [SerializeField]
+    private float shootSpreadStrengthShotgun = 1.0f;
+    [SerializeField]
+    private float shootOffsetStrengthHeavyShotgun = 1.0f;
+    [SerializeField]
+    private float shootSpreadStrengthHeavyShotgun = 1.0f;
+
+
+
+
     private float yMin, yMax;
     private float xMin, xMax;
     // Start is called before the first frame update
@@ -41,10 +72,34 @@ public class ShootingScript : MonoBehaviour
         xMin = min.x;
         xMax = max.x;
     }
+    
+
+    public void SetValueForType(GunType gunType)
+    {
+        if(gunType == GunType.Pistol)
+        {
+            projectileCount = 1;
+            shootOffsetStrength = pistolOffsetStrength;
+        }
+        else
+        {
+            if(gunType == GunType.Shotgun)
+            {
+                shootOffsetStrength = shootOffsetStrengthShotgun;
+            }else if(gunType == GunType.HeavyShotgun)
+            {
+                shootOffsetStrength = shootOffsetStrengthHeavyShotgun;
+            }
+               
+            projectileCount = shotgunProjectileCount;
+        }
+
+    }
 
     // Update is called once per frame
     void Update()
     {
+        SetValueForType(gunType);
         if (shootingRecoilDirections.Count > 0)
         {
             Vector3 finalStrength = new Vector3(0.0f, 0.0f, 0.0f);
@@ -80,13 +135,20 @@ public class ShootingScript : MonoBehaviour
         {
             if (shootedLastTime > _shotCooldown)
             {
-                GameObject projectile;
-                projectile = Instantiate(projectileObject);
-                projectile.transform.position = currentPosition;
-                projectile.GetComponent<ProjectileBehaviour>().SetDirection(direction);
-                shootedLastTime = 0.0f;
-                shootingRecoilDirections.Add(-direction);
-                shootingRecoilTimers.Add(0.0f);
+                for (int i = 0; i < projectileCount; i++)
+                {
+                    GameObject projectile;
+                    projectile = Instantiate(projectileObject);
+                    projectile.transform.position = currentPosition;
+                    float angle = Random.Range(-10f, 10f);
+                    Quaternion quaternion = Quaternion.Euler(0, 0, angle);
+                    Vector3 randomizedDirection = quaternion * direction;
+                    randomizedDirection.z = 0.0f;
+                    projectile.GetComponent<ProjectileBehaviour>().SetDirection(randomizedDirection);
+                    shootedLastTime = 0.0f;
+                    shootingRecoilDirections.Add(-randomizedDirection);
+                    shootingRecoilTimers.Add(0.0f);
+                }
             }
         }
     }

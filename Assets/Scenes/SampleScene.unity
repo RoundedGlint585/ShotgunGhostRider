@@ -1454,7 +1454,19 @@ PrefabInstance:
     - target: {fileID: 6727835412686625754, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
       propertyPath: deadPlayer
       value: 
-      objectReference: {fileID: 21300000, guid: 5602ecb8541c7944c93679b9597064e3, type: 3}
+      objectReference: {fileID: 21300000, guid: 31108c42a6dbc2f448cf937066df6059, type: 3}
+    - target: {fileID: 6727835412686625757, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
+      propertyPath: gunType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6727835412686625757, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
+      propertyPath: shootOffsetStrengthShotgun
+      value: 0.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 6727835412686625757, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
+      propertyPath: shootOffsetStrengthHeavyShotgun
+      value: 0.03
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
 --- !u!1001 &8426671463749387709
