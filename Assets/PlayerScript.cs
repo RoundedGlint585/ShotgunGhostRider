@@ -107,12 +107,15 @@ public class PlayerScript : MonoBehaviour
         fadeOutScreen = GameObject.Find("FadeOutScreen");
 
         GameObject EndLevelSprite = GameObject.Find("EndLevelSprite");
-        Button ShotgunBtn = EndLevelSprite.transform.GetChild(0).GetComponent<Button>();
-        Button HeavyShotgunBtn = EndLevelSprite.transform.GetChild(1).GetComponent<Button>();
-        Button Health = EndLevelSprite.transform.GetChild(2).GetComponent<Button>();
-        ShotgunBtn.onClick.AddListener(GetShotgun);
-        HeavyShotgunBtn.onClick.AddListener(GetHeavyShotgun);
-        Health.onClick.AddListener(RestoreHealth);
+        if (!isMainMenu)
+        {
+            Button ShotgunBtn = EndLevelSprite.transform.GetChild(0).GetComponent<Button>();
+            Button HeavyShotgunBtn = EndLevelSprite.transform.GetChild(1).GetComponent<Button>();
+            Button Health = EndLevelSprite.transform.GetChild(2).GetComponent<Button>();
+            ShotgunBtn.onClick.AddListener(GetShotgun);
+            HeavyShotgunBtn.onClick.AddListener(GetHeavyShotgun);
+            Health.onClick.AddListener(RestoreHealth);
+        }
     }
 
     // Update is called once per frame
