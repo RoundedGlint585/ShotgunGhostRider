@@ -29,8 +29,13 @@ public class EnemyBehaviour : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
             animator = GetComponentInChildren<Animator>();
-            _player.GetComponent<PlayerScript>().Hit();
-            animator.SetTrigger("Hit");
+
+            if (!_player.GetComponent<GameProgressScript>().IsFinished())
+            {
+                _player.GetComponent<PlayerScript>().Hit();
+                animator.SetTrigger("Hit");
+            }
+
             Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length + 1);
             //Destroy(gameObject);
         }

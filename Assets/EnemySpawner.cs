@@ -44,6 +44,7 @@ public class EnemySpawner : MonoBehaviour
                 Vector3 spawnPos = new Vector3(transform.position.x, y, 0.0f);
                 GameObject spawnedEnemy;
                 spawnedEnemy = Instantiate(Enemy, spawnPos, Quaternion.identity);
+                spawnedEnemy.transform.parent = transform;
                 spawnedEnemy.layer = LayerMask.NameToLayer("Enemies");
                 spawnedEnemy.tag = "Enemy";
                 lastTimeSpawned = 0.0f;

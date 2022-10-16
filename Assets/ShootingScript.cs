@@ -66,7 +66,7 @@ public class ShootingScript : MonoBehaviour
     {
         shootedLastTime = _shotCooldown;
         playerMovementBB = GameObject.Find("PlayerMovementBB");
-
+        gunType = UpgradeStorage.gunType;
 
         Vector3 max = playerMovementBB.gameObject.GetComponent<SpriteRenderer>().bounds.max;
         Vector3 min = playerMovementBB.gameObject.GetComponent<SpriteRenderer>().bounds.min;

@@ -27,6 +27,10 @@ public class GameProgressScript : MonoBehaviour
         return currentTime;
     }
 
+    public bool IsFinished()
+    {
+        return isFinished;
+    }
     // Update is called once per frame
     void Update()
     {

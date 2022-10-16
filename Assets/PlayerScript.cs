@@ -2,7 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using static ShootingScript;
 
+public static  class  UpgradeStorage
+{
+    public static GunType gunType = GunType.Pistol;
+    public static int healthPoints = 4; 
+
+}
 public class PlayerScript : MonoBehaviour
 {
     [SerializeField]
@@ -26,6 +34,19 @@ public class PlayerScript : MonoBehaviour
     public float changeImageTimer = 0.0f;
 
     public Sprite deadPlayer;
+
+
+
+
+    // end level variables
+
+    public float endLevelTime = 1.0f;
+    public float endLevelTimer = 0.0f;
+
+    private void Awake()
+    {
+        //DontDestroyOnLoad(this.gameObject);
+    }
     public int GetMaxLifesCount()
     {
         return _maxLifeCount;
@@ -43,9 +64,30 @@ public class PlayerScript : MonoBehaviour
     {
         _maxSpeed = value;
     }
+
+    public void RestoreHealth()
+    {
+        UpgradeStorage.healthPoints = _maxLifeCount;
+        SceneManager.LoadScene(1);
+    }
+
+    public void GetHeavyShotgun()
+    {
+        UpgradeStorage.gunType = GunType.HeavyShotgun;
+        SceneManager.LoadScene(1);
+    }
+
+    public void GetShotgun()
+    {
+        UpgradeStorage.gunType = GunType.Shotgun;
+        SceneManager.LoadScene(1);
+    }
     public int Hit()
     {
-        _lifeCount -= 1;
+        if (_lifeCount > 0)
+        {
+            _lifeCount -= 1;
+        }
         if(_lifeCount == 0)
         {
             _isDead = true;
@@ -61,8 +103,16 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _lifeCount = _maxLifeCount;
+        _lifeCount = UpgradeStorage.healthPoints;
         fadeOutScreen = GameObject.Find("FadeOutScreen");
+
+        GameObject EndLevelSprite = GameObject.Find("EndLevelSprite");
+        Button ShotgunBtn = EndLevelSprite.transform.GetChild(0).GetComponent<Button>();
+        Button HeavyShotgunBtn = EndLevelSprite.transform.GetChild(1).GetComponent<Button>();
+        Button Health = EndLevelSprite.transform.GetChild(2).GetComponent<Button>();
+        ShotgunBtn.onClick.AddListener(GetShotgun);
+        HeavyShotgunBtn.onClick.AddListener(GetHeavyShotgun);
+        Health.onClick.AddListener(RestoreHealth);
     }
 
     // Update is called once per frame
@@ -70,6 +120,7 @@ public class PlayerScript : MonoBehaviour
     {
         if (needToMove)
         {
+            //UpgradeStorage.gunType = GunType.Pistol;
             transform.position = transform.position + new Vector3(1, 0, 0) * _internalSpeed * Time.deltaTime;
             transform.GetChild(1).gameObject.SetActive(true);
             transform.GetChild(0).gameObject.GetComponent<Animator>().enabled = true;
@@ -78,7 +129,7 @@ public class PlayerScript : MonoBehaviour
             }
         }   
 
-        if(_lifeCount <= 0)
+        if(_isDead)
         {
             fadeOutScreen.GetComponent<SpriteRenderer>().color = fadeOutScreen.GetComponent<SpriteRenderer>().color + new Color(0, 0, 0, 1.0f) * fadeOutTime * Time.deltaTime;
             transform.GetChild(1).gameObject.SetActive(false);
@@ -101,8 +152,33 @@ public class PlayerScript : MonoBehaviour
                     }
                 }
             }
+        }
 
 
+        if (GetComponent<GameProgressScript>().IsFinished())
+        {
+
+            GameObject EndLevelSprite = GameObject.Find("EndLevelSprite");
+            Button ShotgunBtn = EndLevelSprite.transform.GetChild(0).GetComponent<Button>();
+            Button HeavyShotgunBtn = EndLevelSprite.transform.GetChild(1).GetComponent<Button>();
+            Button Health = EndLevelSprite.transform.GetChild(2).GetComponent<Button>();
+            Color currentColor = EndLevelSprite.GetComponent<Image>().color;
+            EndLevelSprite.GetComponent<Image>().color = currentColor + new Color(0, 0, 0, 1.0f) * fadeOutTime * Time.deltaTime;
+            if (EndLevelSprite.GetComponent<Image>().color.a > 1.0)
+            {
+                if (!EndLevelSprite.transform.GetChild(0).gameObject.activeSelf)
+                {
+                    EndLevelSprite.transform.GetChild(0).gameObject.SetActive(true);
+                    EndLevelSprite.transform.GetChild(1).gameObject.SetActive(true);
+                    EndLevelSprite.transform.GetChild(2).gameObject.SetActive(true);
+/*                    ShotgunBtn.onClick.AddListener(GetShotgun);
+                    HeavyShotgunBtn.onClick.AddListener(GetHeavyShotgun);
+                    Health.onClick.AddListener(RestoreHealth);*/
+                    GetComponent<ShootingScript>()._canShoot = false;
+                    
+                }
+               
+            }
         }
     }
 }
