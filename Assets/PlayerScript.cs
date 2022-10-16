@@ -14,6 +14,10 @@ public static  class  UpgradeStorage
 public class PlayerScript : MonoBehaviour
 {
     [SerializeField]
+    public int nextLevelIndex = 1;
+
+
+    [SerializeField]
     private int _maxLifeCount = 4;
 
     private int _lifeCount = 4;
@@ -68,19 +72,26 @@ public class PlayerScript : MonoBehaviour
     public void RestoreHealth()
     {
         UpgradeStorage.healthPoints = _maxLifeCount;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(nextLevelIndex);
     }
 
     public void GetHeavyShotgun()
     {
+        UpgradeStorage.healthPoints = _lifeCount;
         UpgradeStorage.gunType = GunType.HeavyShotgun;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(nextLevelIndex);
     }
 
     public void GetShotgun()
     {
+        UpgradeStorage.healthPoints = _lifeCount;
         UpgradeStorage.gunType = GunType.Shotgun;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene(nextLevelIndex);
+    }
+    public void resetUpgrades()
+    {
+        UpgradeStorage.healthPoints = _maxLifeCount;
+        UpgradeStorage.gunType = GunType.Pistol;
     }
     public int Hit()
     {
@@ -91,6 +102,7 @@ public class PlayerScript : MonoBehaviour
         if(_lifeCount == 0)
         {
             _isDead = true;
+            resetUpgrades();
         }
         return _lifeCount;
     }

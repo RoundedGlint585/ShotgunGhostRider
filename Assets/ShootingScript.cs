@@ -11,6 +11,7 @@ public class ShootingScript : MonoBehaviour
         Pistol = 1,
         Shotgun = 2,
         HeavyShotgun = 3,
+        SniperRifle = 4
     }
 
     public int projectileCount = 1;
@@ -40,7 +41,7 @@ public class ShootingScript : MonoBehaviour
 
 
     [SerializeField]
-    private float pistolOffsetStrength = 0.01f;
+    private float pistolOffsetStrength = 0.005f;
 
     [SerializeField]
     private float multipleProjectileSpread = 0.0f;
@@ -79,26 +80,34 @@ public class ShootingScript : MonoBehaviour
 
     public void SetValueForType(GunType gunType)
     {
-        if(gunType == GunType.Pistol)
+        switch (gunType)
         {
-            projectileCount = 1;
-            shootOffsetStrength = pistolOffsetStrength;
-            multipleProjectileSpread = 0.0f;
-        }
-        else
-        {
-            if(gunType == GunType.Shotgun)
-            {
+            case GunType.Pistol:
+
+                projectileCount = 1;
+                shootOffsetStrength = pistolOffsetStrength;
+                multipleProjectileSpread = 0.0f;
+                break;
+
+            case GunType.Shotgun:
+
                 shootOffsetStrength = shootOffsetStrengthShotgun;
                 multipleProjectileSpread = shootSpreadStrengthShotgun;
-            }
-            else if(gunType == GunType.HeavyShotgun)
-            {
+                projectileCount = shotgunProjectileCount;
+                break;
+
+            case GunType.HeavyShotgun:
+                
                 shootOffsetStrength = shootOffsetStrengthHeavyShotgun;
                 multipleProjectileSpread = shootSpreadStrengthHeavyShotgun;
-            }
-               
-            projectileCount = shotgunProjectileCount;
+                projectileCount = shotgunProjectileCount;
+                break;
+
+            case GunType.SniperRifle:
+                //TODO: SniperRifle LOgic
+                break;
+                              
+        
         }
 
     }

@@ -52,7 +52,8 @@ public class EnemyBehaviour : MonoBehaviour
         {
             //_player.GetComponent<PlayerScript>().Hit();
             //probably need to add cooldown before death
-            
+            animator.SetTrigger("Hit");
+
         }
         else
         {
