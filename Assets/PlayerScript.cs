@@ -171,9 +171,6 @@ public class PlayerScript : MonoBehaviour
                     EndLevelSprite.transform.GetChild(0).gameObject.SetActive(true);
                     EndLevelSprite.transform.GetChild(1).gameObject.SetActive(true);
                     EndLevelSprite.transform.GetChild(2).gameObject.SetActive(true);
-/*                    ShotgunBtn.onClick.AddListener(GetShotgun);
-                    HeavyShotgunBtn.onClick.AddListener(GetHeavyShotgun);
-                    Health.onClick.AddListener(RestoreHealth);*/
                     GetComponent<ShootingScript>()._canShoot = false;
                     
                 }
