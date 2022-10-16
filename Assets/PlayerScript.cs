@@ -20,6 +20,12 @@ public class PlayerScript : MonoBehaviour
 
     public bool needToMove = false;
     public bool isMainMenu = false;
+
+    GameObject fadeOutScreen;
+    public float fadeOutTime = 1.0f;
+    public float changeImageTimer = 0.0f;
+
+    public Sprite deadPlayer;
     public int GetMaxLifesCount()
     {
         return _maxLifeCount;
@@ -51,11 +57,12 @@ public class PlayerScript : MonoBehaviour
     {
         return _isDead;
     }
-
+    
     // Start is called before the first frame update
     void Start()
     {
         _lifeCount = _maxLifeCount;
+        fadeOutScreen = GameObject.Find("FadeOutScreen");
     }
 
     // Update is called once per frame
@@ -71,9 +78,30 @@ public class PlayerScript : MonoBehaviour
             }
         }   
 
-/*        if(_lifeCount == 0)
+        if(_lifeCount <= 0)
         {
+            fadeOutScreen.GetComponent<SpriteRenderer>().color = fadeOutScreen.GetComponent<SpriteRenderer>().color + new Color(0, 0, 0, 1.0f) * fadeOutTime * Time.deltaTime;
+            transform.GetChild(1).gameObject.SetActive(false);
+            transform.GetChild(0).gameObject.GetComponent<Animator>().enabled = false;
+            GetComponent<ShootingScript>()._canShoot = false;
+            _maxSpeed = 0.0f;
+            if(fadeOutScreen.GetComponent<SpriteRenderer>().color.a > 1.0)
+            {
+                changeImageTimer += Time.deltaTime;
+                if(changeImageTimer > 1.0f)
+                {
+                    transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = deadPlayer;
+                }
+                if(changeImageTimer > 1.2f)
+                {
+                    if (Input.GetMouseButtonDown(0))
+                    {
+                        SceneManager.LoadScene(0);
+                    }
+                }
+            }
 
-        }*/
+
+        }
     }
 }

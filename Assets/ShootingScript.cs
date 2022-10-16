@@ -5,7 +5,7 @@ using System;
 public class ShootingScript : MonoBehaviour
 {
     [SerializeField]
-    private bool _canShoot = true;
+    public bool _canShoot = true;
     [SerializeField]
     private float _shotCooldown = 0.5f;
 

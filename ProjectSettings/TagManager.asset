@@ -51,6 +51,9 @@ TagManager:
   - name: Enemies
     uniqueID: 2884638739
     locked: 0
+  - name: FadeOut
+    uniqueID: 161417029
+    locked: 0
   - name: Player
     uniqueID: 1808285329
     locked: 0
