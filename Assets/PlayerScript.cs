@@ -70,5 +70,10 @@ public class PlayerScript : MonoBehaviour
                 SceneManager.LoadScene(1);
             }
         }   
+
+/*        if(_lifeCount == 0)
+        {
+
+        }*/
     }
 }
