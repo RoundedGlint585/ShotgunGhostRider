@@ -16,19 +16,23 @@ public class EnemyBehaviour : MonoBehaviour
     float _attackDistance = 0.5f;
 
     private bool _wasRenderedAtLeastOnce = false;
-
+    private Animator animator;
     // Start is called before the first frame update
     void Start()
     {
         _player = GameObject.Find("MainCharacter");
+        
 
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
+            animator = GetComponentInChildren<Animator>();
             _player.GetComponent<PlayerScript>().Hit();
-            Destroy(gameObject);
+            animator.SetTrigger("Hit");
+            Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length + 1);
+            //Destroy(gameObject);
         }
     }
     // Update is called once per frame
