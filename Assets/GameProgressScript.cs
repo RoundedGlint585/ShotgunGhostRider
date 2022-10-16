@@ -30,7 +30,10 @@ public class GameProgressScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentTime += Time.deltaTime;
+        if (GetComponent<PlayerScript>().GetLifes() > 0)
+        {
+            currentTime += Time.deltaTime;
+        }
         if(currentTime >= levelLength)
         {
             isFinished = true;

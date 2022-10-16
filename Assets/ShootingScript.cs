@@ -43,6 +43,9 @@ public class ShootingScript : MonoBehaviour
     private float pistolOffsetStrength = 0.01f;
 
     [SerializeField]
+    private float multipleProjectileSpread = 0.0f;
+
+    [SerializeField]
     private int shotgunProjectileCount =3;
     [SerializeField]
     private float shootOffsetStrengthShotgun = 1.0f;
@@ -80,15 +83,19 @@ public class ShootingScript : MonoBehaviour
         {
             projectileCount = 1;
             shootOffsetStrength = pistolOffsetStrength;
+            multipleProjectileSpread = 0.0f;
         }
         else
         {
             if(gunType == GunType.Shotgun)
             {
                 shootOffsetStrength = shootOffsetStrengthShotgun;
-            }else if(gunType == GunType.HeavyShotgun)
+                multipleProjectileSpread = shootSpreadStrengthShotgun;
+            }
+            else if(gunType == GunType.HeavyShotgun)
             {
                 shootOffsetStrength = shootOffsetStrengthHeavyShotgun;
+                multipleProjectileSpread = shootSpreadStrengthHeavyShotgun;
             }
                
             projectileCount = shotgunProjectileCount;
@@ -140,7 +147,7 @@ public class ShootingScript : MonoBehaviour
                     GameObject projectile;
                     projectile = Instantiate(projectileObject);
                     projectile.transform.position = currentPosition;
-                    float angle = Random.Range(-10f, 10f);
+                    float angle = Random.Range(-10f* multipleProjectileSpread, 10f * multipleProjectileSpread);
                     Quaternion quaternion = Quaternion.Euler(0, 0, angle);
                     Vector3 randomizedDirection = quaternion * direction;
                     randomizedDirection.z = 0.0f;

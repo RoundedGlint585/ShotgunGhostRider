@@ -1457,7 +1457,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 31108c42a6dbc2f448cf937066df6059, type: 3}
     - target: {fileID: 6727835412686625757, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
       propertyPath: gunType
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6727835412686625757, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
       propertyPath: shootOffsetStrengthShotgun
@@ -1466,6 +1466,10 @@ PrefabInstance:
     - target: {fileID: 6727835412686625757, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
       propertyPath: shootOffsetStrengthHeavyShotgun
       value: 0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 6727835412686625757, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
+      propertyPath: shootSpreadStrengthHeavyShotgun
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
