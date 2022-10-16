@@ -73,14 +73,16 @@ public class ShootingScript : MonoBehaviour
         shootedLastTime += Time.deltaTime;
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         mousePosition.z = 0.0f;
-        Vector3 currentPosition = transform.position;
+        GameObject shootingPoint = GameObject.Find("ShootingPoint");
+        Vector3 currentPosition = shootingPoint.transform.position;
         Vector3 direction = (mousePosition - currentPosition).normalized;
         if (Input.GetMouseButtonDown(0) && _canShoot)
         {
             if (shootedLastTime > _shotCooldown)
             {
                 GameObject projectile;
-                projectile = Instantiate(projectileObject, transform);
+                projectile = Instantiate(projectileObject);
+                projectile.transform.position = currentPosition;
                 projectile.GetComponent<ProjectileBehaviour>().SetDirection(direction);
                 shootedLastTime = 0.0f;
                 shootingRecoilDirections.Add(-direction);
