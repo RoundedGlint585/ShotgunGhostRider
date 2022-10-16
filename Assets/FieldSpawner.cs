@@ -19,6 +19,8 @@ public class FieldSpawner : MonoBehaviour
 
     private int currentTileCount = 0;
 
+
+    public bool isBackground = false;
     public void RemoveFromTileCount() {
         currentTileCount--;
     }
@@ -57,7 +59,19 @@ public class FieldSpawner : MonoBehaviour
             NewTile = Instantiate(tiles[Random.Range(0, tiles.Length)], transform);
             NewTile.transform.position = new Vector3(lastTile.transform.position.x + tileSize, lastTile.transform.position.y, 0.0f);
             NewTile.transform.localScale = new Vector3(tileSize, tileSize, 1);
-            NewTile.layer = LayerMask.NameToLayer("Level");
+            if (isBackground)
+            {
+                //NewTile.layer = LayerMask.NameToLayer("Background");
+                NewTile.GetComponent<SpriteRenderer>().sortingOrder = LayerMask.NameToLayer("Background");
+                NewTile.GetComponent<SpriteRenderer>().sortingLayerName = "Background";
+            }
+            else
+            {
+                //NewTile.layer = LayerMask.NameToLayer("Level");
+                NewTile.GetComponent<SpriteRenderer>().sortingOrder = LayerMask.NameToLayer("Level");
+                NewTile.GetComponent<SpriteRenderer>().sortingLayerName = "Level";
+            }
+
             currentTileCount++;
             lastTile = NewTile;
             
