@@ -23,8 +23,19 @@ public class ProjectileBehaviour : MonoBehaviour
     {
         if(collision.gameObject.layer == LayerMask.NameToLayer("Enemies"))
         {
-            Destroy(gameObject);
-            Destroy(collision.gameObject);
+            IKillable killable = collision.gameObject.GetComponent<IKillable>();
+            if (killable!=null)
+            {
+                Debug.Log("killable");
+                killable.Kill();
+            }
+            else
+            {
+                Debug.Log("not killable");
+                Destroy(collision.gameObject);
+            }
+
+            Destroy(gameObject);            
         }
     }
     // Update is called once per frame

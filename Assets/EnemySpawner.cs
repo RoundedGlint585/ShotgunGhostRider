@@ -10,7 +10,7 @@ public class EnemySpawner : MonoBehaviour
     private float _spawnCooldown = 1.0f;
 
     [SerializeField]
-    private int _maxEnemies = 5;
+    public int _maxEnemies = 5;
 
     private float lastTimeSpawned = 0.0f;
 

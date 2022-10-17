@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyBehaviour : MonoBehaviour
+public interface IKillable
+{
+    void Kill();
+}
+
+public class EnemyBehaviour : MonoBehaviour, IKillable
 {
 
     private GameObject _player;
@@ -67,5 +72,10 @@ public class EnemyBehaviour : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public void Kill()
+    {        
+        Destroy(gameObject);
     }
 }

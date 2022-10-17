@@ -13,6 +13,14 @@ public class ShootingScript : MonoBehaviour
         HeavyShotgun = 3,
         SniperRifle = 4
     }
+    [SerializeField]
+    public Sprite PistolSprite;
+    [SerializeField]
+    public Sprite ShotgunSprite;
+    [SerializeField]
+    public Sprite LongShotgunSprite;
+    [SerializeField]
+    public Sprite SniperRifleSprite;
 
     public int projectileCount = 1;
     [SerializeField]
@@ -75,11 +83,15 @@ public class ShootingScript : MonoBehaviour
         yMax = max.y;
         xMin = min.x;
         xMax = max.x;
+
+        SetValueForType(gunType);
     }
     
 
     public void SetValueForType(GunType gunType)
     {
+        SpriteRenderer spriteRenderer = GameObject.Find("Gun").GetComponent<SpriteRenderer>();
+        Transform shootingPoint = GameObject.Find("ShootingPoint").transform;
         switch (gunType)
         {
             case GunType.Pistol:
@@ -87,6 +99,8 @@ public class ShootingScript : MonoBehaviour
                 projectileCount = 1;
                 shootOffsetStrength = pistolOffsetStrength;
                 multipleProjectileSpread = 0.0f;
+                spriteRenderer.sprite = PistolSprite;
+                shootingPoint.localPosition = new Vector3(-0.5f, 0.05f, 0);
                 break;
 
             case GunType.Shotgun:
@@ -94,6 +108,8 @@ public class ShootingScript : MonoBehaviour
                 shootOffsetStrength = shootOffsetStrengthShotgun;
                 multipleProjectileSpread = shootSpreadStrengthShotgun;
                 projectileCount = shotgunProjectileCount;
+                spriteRenderer.sprite = ShotgunSprite;
+                shootingPoint.localPosition = new Vector3(-0.2f, 0.05f, 0);
                 break;
 
             case GunType.HeavyShotgun:
@@ -101,10 +117,15 @@ public class ShootingScript : MonoBehaviour
                 shootOffsetStrength = shootOffsetStrengthHeavyShotgun;
                 multipleProjectileSpread = shootSpreadStrengthHeavyShotgun;
                 projectileCount = shotgunProjectileCount;
+                spriteRenderer.sprite = LongShotgunSprite;
+                shootingPoint.localPosition = new Vector3(0f, 0.05f, 0);
                 break;
 
             case GunType.SniperRifle:
                 //TODO: SniperRifle LOgic
+                projectileCount = 1;
+                spriteRenderer.sprite = SniperRifleSprite;
+                shootingPoint.localPosition = new Vector3(0.1f, 0.05f, 0);
                 break;
                               
         
@@ -115,7 +136,7 @@ public class ShootingScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        SetValueForType(gunType);
+        //SetValueForType(gunType);
         if (shootingRecoilDirections.Count > 0)
         {
             Vector3 finalStrength = new Vector3(0.0f, 0.0f, 0.0f);

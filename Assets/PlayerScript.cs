@@ -39,6 +39,7 @@ public class PlayerScript : MonoBehaviour
 
     public Sprite deadPlayer;
 
+    private AudioSource audioSource;
 
 
 
@@ -117,6 +118,11 @@ public class PlayerScript : MonoBehaviour
     {
         _lifeCount = UpgradeStorage.healthPoints;
         fadeOutScreen = GameObject.Find("FadeOutScreen");
+        audioSource = GetComponent<AudioSource>();
+        if (SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            audioSource.Play();
+        }
 
         GameObject EndLevelSprite = GameObject.Find("EndLevelSprite");
         if (!isMainMenu)
@@ -146,6 +152,7 @@ public class PlayerScript : MonoBehaviour
 
         if(_isDead)
         {
+            audioSource.Stop();
             fadeOutScreen.GetComponent<SpriteRenderer>().color = fadeOutScreen.GetComponent<SpriteRenderer>().color + new Color(0, 0, 0, 1.0f) * fadeOutTime * Time.deltaTime;
             transform.GetChild(1).gameObject.SetActive(false);
             transform.GetChild(0).gameObject.GetComponent<Animator>().enabled = false;
@@ -172,7 +179,7 @@ public class PlayerScript : MonoBehaviour
 
         if (GetComponent<GameProgressScript>().IsFinished())
         {
-
+            audioSource.Stop();
             GameObject EndLevelSprite = GameObject.Find("EndLevelSprite");
             Button ShotgunBtn = EndLevelSprite.transform.GetChild(0).GetComponent<Button>();
             Button HeavyShotgunBtn = EndLevelSprite.transform.GetChild(1).GetComponent<Button>();
