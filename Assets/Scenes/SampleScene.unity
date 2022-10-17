@@ -1613,6 +1613,102 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!82 &1213796392
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213796384}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1507742921
 GameObject:
   m_ObjectHideFlags: 0
@@ -2450,6 +2546,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5271032223487634481, guid: eb7c0fb64f7c8a14ab0a80ef5802a86b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 7.5523148
+      objectReference: {fileID: 0}
+    - target: {fileID: 5271032223487634481, guid: eb7c0fb64f7c8a14ab0a80ef5802a86b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.4883
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb7c0fb64f7c8a14ab0a80ef5802a86b, type: 3}
 --- !u!1001 &5474238520298619064
@@ -2681,21 +2785,53 @@ PrefabInstance:
       value: MainCharacter
       objectReference: {fileID: 0}
     - target: {fileID: 6727835412686625754, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
+      propertyPath: death
+      value: 
+      objectReference: {fileID: 8300000, guid: 4e68876bf2b1f454ebc16476a1748e10, type: 3}
+    - target: {fileID: 6727835412686625754, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
+      propertyPath: damage
+      value: 
+      objectReference: {fileID: 8300000, guid: cdc78926f69793048a9c289049b41480, type: 3}
+    - target: {fileID: 6727835412686625754, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
       propertyPath: deadPlayer
       value: 
       objectReference: {fileID: 21300000, guid: 31108c42a6dbc2f448cf937066df6059, type: 3}
+    - target: {fileID: 6727835412686625754, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1213796391}
+    - target: {fileID: 6727835412686625754, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
+      propertyPath: nextLevelIndex
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6727835412686625754, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
+      propertyPath: audioSourceForShortSounds
+      value: 
+      objectReference: {fileID: 1213796392}
     - target: {fileID: 6727835412686625755, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
       propertyPath: levelLength
-      value: 20
+      value: 70
       objectReference: {fileID: 0}
     - target: {fileID: 6727835412686625755, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
       propertyPath: bossSpawnTime
-      value: 10
+      value: 46
       objectReference: {fileID: 0}
+    - target: {fileID: 6727835412686625757, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
+      propertyPath: pistol
+      value: 
+      objectReference: {fileID: 8300000, guid: 08549a616128bf6408a2a522e45bf7ae, type: 3}
     - target: {fileID: 6727835412686625757, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
       propertyPath: gunType
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6727835412686625757, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
+      propertyPath: shotgun
+      value: 
+      objectReference: {fileID: 8300000, guid: e2f3d54d674d03744a5a1338d84a5ec1, type: 3}
+    - target: {fileID: 6727835412686625757, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 1213796392}
     - target: {fileID: 6727835412686625757, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
       propertyPath: PistolSprite
       value: 
@@ -2714,15 +2850,15 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: ce9932821cfbfc341a4d9429a3ee4104, type: 3}
     - target: {fileID: 6727835412686625757, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
       propertyPath: shootOffsetStrengthShotgun
-      value: 0.02
+      value: 0.008
       objectReference: {fileID: 0}
     - target: {fileID: 6727835412686625757, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
       propertyPath: shootOffsetStrengthHeavyShotgun
-      value: 0.03
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 6727835412686625757, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}
       propertyPath: shootSpreadStrengthHeavyShotgun
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 010b9da875b7bfd4cad959483b1c807b, type: 3}

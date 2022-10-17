@@ -4780,7 +4780,7 @@ ParticleSystemRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1808285329
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_RenderMode: 0
   m_MeshDistribution: 0
@@ -4863,11 +4863,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a654b5ff534e7394c8aa8a4a4cb87620, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextLevelIndex: 1
   _maxLifeCount: 4
   _maxSpeed: 3
   _internalSpeed: 1
   needToMove: 0
   isMainMenu: 0
+  fadeOutTime: 1
+  changeImageTimer: 0
+  deadPlayer: {fileID: 0}
+  audioSource: {fileID: 0}
+  audioSourceForShortSounds: {fileID: 0}
+  damage: {fileID: 0}
+  death: {fileID: 0}
+  endLevelTime: 1
+  endLevelTimer: 0
 --- !u!114 &6727835412686625755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4881,6 +4891,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelLength: 60
+  bossSpawnTime: 40
 --- !u!114 &6727835412686625757
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4893,8 +4904,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e6d3459d740d764b98c01a2f3008295, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PistolSprite: {fileID: 0}
+  ShotgunSprite: {fileID: 0}
+  LongShotgunSprite: {fileID: 0}
+  SniperRifleSprite: {fileID: 0}
+  projectileCount: 1
+  gunType: 0
   _canShoot: 1
   _shotCooldown: 0.5
+  pistol: {fileID: 0}
+  shotgun: {fileID: 0}
+  audioSource: {fileID: 0}
   shootOffsetStrength: 0.01
   animCurve:
     serializedVersion: 2
@@ -4930,6 +4950,13 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   projectileObject: {fileID: 4770873616632976994, guid: 9306602035d0d5f45a4000d9d936a109, type: 3}
+  pistolOffsetStrength: 0.005
+  multipleProjectileSpread: 0
+  shotgunProjectileCount: 3
+  shootOffsetStrengthShotgun: 0.008
+  shootSpreadStrengthShotgun: 3
+  shootOffsetStrengthHeavyShotgun: 0.011
+  shootSpreadStrengthHeavyShotgun: 1.5
 --- !u!61 &6727835412686625759
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4943,7 +4970,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.17863655, y: 0.5359098}
+  m_Offset: {x: -1.9869435, y: 1.105192}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -4954,7 +4981,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 5.244405, y: 1.8431647}
+  m_Size: {x: 5.3337035, y: 1.3966689}
   m_EdgeRadius: 0
 --- !u!50 &6727835412686625756
 Rigidbody2D:
@@ -5049,7 +5076,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1808285329
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 1352300101, guid: c10ccc03ccf110f4c9ecc1da64bd1581, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -5155,7 +5182,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -182900691
-  m_SortingLayer: 5
+  m_SortingLayer: 6
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b2b375c7de77cdf42aa127ecf13afe59, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

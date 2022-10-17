@@ -39,7 +39,15 @@ public class PlayerScript : MonoBehaviour
 
     public Sprite deadPlayer;
 
-    private AudioSource audioSource;
+    [SerializeField]
+    public AudioSource audioSource;
+    [SerializeField]
+    public AudioSource audioSourceForShortSounds;
+
+    public AudioClip damage;
+    public AudioClip death;
+
+    private bool finished = false;
 
 
 
@@ -96,8 +104,11 @@ public class PlayerScript : MonoBehaviour
     }
     public int Hit()
     {
-        if (_lifeCount > 0)
+        
+        
+        if (_lifeCount > 0 && !finished)
         {
+            audioSourceForShortSounds.PlayOneShot(damage);
             _lifeCount -= 1;
         }
         if(_lifeCount == 0)
@@ -118,8 +129,7 @@ public class PlayerScript : MonoBehaviour
     {
         _lifeCount = UpgradeStorage.healthPoints;
         fadeOutScreen = GameObject.Find("FadeOutScreen");
-        audioSource = GetComponent<AudioSource>();
-        if (SceneManager.GetActiveScene().buildIndex == 1)
+        if (SceneManager.GetActiveScene().buildIndex == 1 || SceneManager.GetActiveScene().buildIndex == 2)
         {
             audioSource.Play();
         }
@@ -163,10 +173,11 @@ public class PlayerScript : MonoBehaviour
                 changeImageTimer += Time.deltaTime;
                 if(changeImageTimer > 1.0f)
                 {
+                    audioSourceForShortSounds.PlayOneShot(death);
                     transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = deadPlayer;
                     transform.GetChild(2).transform.GetChild(0).GetComponent<SpriteRenderer>().enabled = false;
                 }
-                if(changeImageTimer > 1.2f)
+                if(changeImageTimer > 1.5f)
                 {
                     if (Input.GetMouseButtonDown(0))
                     {
@@ -179,7 +190,12 @@ public class PlayerScript : MonoBehaviour
 
         if (GetComponent<GameProgressScript>().IsFinished())
         {
+            finished = true;
             audioSource.Stop();
+            if(nextLevelIndex == 3)
+            {
+                SceneManager.LoadScene(nextLevelIndex);
+            }
             GameObject EndLevelSprite = GameObject.Find("EndLevelSprite");
             Button ShotgunBtn = EndLevelSprite.transform.GetChild(0).GetComponent<Button>();
             Button HeavyShotgunBtn = EndLevelSprite.transform.GetChild(1).GetComponent<Button>();

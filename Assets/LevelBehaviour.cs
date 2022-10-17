@@ -16,6 +16,7 @@ public class LevelBehaviour : MonoBehaviour
 
     void TaskOnClick()
     {
+        GetComponent<AudioSource>().Play();
         player.GetComponent<PlayerScript>().needToMove = true;
         player.GetComponent<PlayerScript>().SetMaxSpeed(0.0f);
     }

@@ -29,7 +29,14 @@ public class ShootingScript : MonoBehaviour
     [SerializeField]
     public bool _canShoot = true;
     [SerializeField]
-    private float _shotCooldown = 0.5f;
+    private float _shotCooldown = 0.4f;
+
+    public AudioClip pistol;
+    public AudioClip shotgun;
+
+    private AudioClip shot;
+
+    public AudioSource audioSource;
 
 
     private float shootedLastTime;
@@ -57,11 +64,11 @@ public class ShootingScript : MonoBehaviour
     [SerializeField]
     private int shotgunProjectileCount =3;
     [SerializeField]
-    private float shootOffsetStrengthShotgun = 1.0f;
+    private float shootOffsetStrengthShotgun = 0.01f;
     [SerializeField]
-    private float shootSpreadStrengthShotgun = 1.0f;
+    private float shootSpreadStrengthShotgun = 1.5f;
     [SerializeField]
-    private float shootOffsetStrengthHeavyShotgun = 1.0f;
+    private float shootOffsetStrengthHeavyShotgun = 0.02f;
     [SerializeField]
     private float shootSpreadStrengthHeavyShotgun = 1.0f;
 
@@ -96,33 +103,38 @@ public class ShootingScript : MonoBehaviour
         {
             case GunType.Pistol:
 
+                _shotCooldown = 0.3f;
                 projectileCount = 1;
                 shootOffsetStrength = pistolOffsetStrength;
                 multipleProjectileSpread = 0.0f;
                 spriteRenderer.sprite = PistolSprite;
                 shootingPoint.localPosition = new Vector3(-0.5f, 0.05f, 0);
+                shot = pistol;
                 break;
 
             case GunType.Shotgun:
-
+                _shotCooldown = 0.5f;
                 shootOffsetStrength = shootOffsetStrengthShotgun;
                 multipleProjectileSpread = shootSpreadStrengthShotgun;
-                projectileCount = shotgunProjectileCount;
+                projectileCount = shotgunProjectileCount+2;
                 spriteRenderer.sprite = ShotgunSprite;
                 shootingPoint.localPosition = new Vector3(-0.2f, 0.05f, 0);
+                shot = shotgun;
                 break;
 
             case GunType.HeavyShotgun:
-                
+                _shotCooldown = 0.5f;
                 shootOffsetStrength = shootOffsetStrengthHeavyShotgun;
                 multipleProjectileSpread = shootSpreadStrengthHeavyShotgun;
                 projectileCount = shotgunProjectileCount;
                 spriteRenderer.sprite = LongShotgunSprite;
                 shootingPoint.localPosition = new Vector3(0f, 0.05f, 0);
+                shot = shotgun;
                 break;
 
             case GunType.SniperRifle:
                 //TODO: SniperRifle LOgic
+                _shotCooldown = 0.4f;
                 projectileCount = 1;
                 spriteRenderer.sprite = SniperRifleSprite;
                 shootingPoint.localPosition = new Vector3(0.1f, 0.05f, 0);
@@ -172,6 +184,7 @@ public class ShootingScript : MonoBehaviour
         {
             if (shootedLastTime > _shotCooldown)
             {
+                audioSource.PlayOneShot(shot);
                 for (int i = 0; i < projectileCount; i++)
                 {
                     GameObject projectile;

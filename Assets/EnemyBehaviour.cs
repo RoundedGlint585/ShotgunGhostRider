@@ -26,14 +26,14 @@ public class EnemyBehaviour : MonoBehaviour, IKillable
     void Start()
     {
         _player = GameObject.Find("MainCharacter");
-        
+        animator = GetComponentInChildren<Animator>();
 
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.layer == LayerMask.NameToLayer("Player"))
         {
-            animator = GetComponentInChildren<Animator>();
+            
 
             if (!_player.GetComponent<GameProgressScript>().IsFinished())
             {
@@ -41,7 +41,7 @@ public class EnemyBehaviour : MonoBehaviour, IKillable
                 animator.SetTrigger("Hit");
             }
 
-            Destroy(gameObject, animator.GetCurrentAnimatorStateInfo(0).length + 1);
+            Destroy(gameObject);
             //Destroy(gameObject);
         }
     }
@@ -53,6 +53,10 @@ public class EnemyBehaviour : MonoBehaviour, IKillable
             _wasRenderedAtLeastOnce = GetComponentInChildren<SpriteRenderer>().isVisible;
         }
         float distanceToPlayer = (transform.position - _player.transform.position).magnitude;
+        if (distanceToPlayer > 10)
+        {
+            Destroy(gameObject);
+        }
         if (distanceToPlayer < _attackDistance)
         {
             //_player.GetComponent<PlayerScript>().Hit();

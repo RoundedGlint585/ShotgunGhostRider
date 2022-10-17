@@ -12,6 +12,10 @@ public class FieldSpawner : MonoBehaviour
     private int tileSize = 10;
 
     [SerializeField]
+    private int order = 0;
+
+
+    [SerializeField]
     GameObject[] tiles;
 
     [SerializeField]
@@ -62,7 +66,7 @@ public class FieldSpawner : MonoBehaviour
             if (isBackground)
             {
                 //NewTile.layer = LayerMask.NameToLayer("Background");
-                NewTile.GetComponent<SpriteRenderer>().sortingOrder = LayerMask.NameToLayer("Background");
+                NewTile.GetComponent<SpriteRenderer>().sortingOrder = LayerMask.NameToLayer("Background") + order;
                 NewTile.GetComponent<SpriteRenderer>().sortingLayerName = "Background";
             }
             else

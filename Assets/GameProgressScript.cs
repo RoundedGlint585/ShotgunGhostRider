@@ -63,5 +63,12 @@ public class GameProgressScript : MonoBehaviour
             spawner._maxEnemies = 0;
             bossSpawner._maxEnemies = 3;
         }
+        if (SceneManager.GetActiveScene().buildIndex == 2)
+        {
+            EnemySpawner spawner = GameObject.Find("EnemySpawner").GetComponent<EnemySpawner>();
+            EnemySpawner bossSpawner = GameObject.Find("BigGhostSpawner").GetComponent<EnemySpawner>();
+            spawner._maxEnemies = 0;
+            bossSpawner._maxEnemies = 4;
+        }
     }
 }

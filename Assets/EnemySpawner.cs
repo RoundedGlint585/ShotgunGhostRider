@@ -12,6 +12,8 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     public int _maxEnemies = 5;
 
+   
+
     private float lastTimeSpawned = 0.0f;
 
     public GameObject Enemy;
